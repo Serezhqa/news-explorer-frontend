@@ -7,7 +7,11 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 function SavedNews(props) {
   React.useEffect(() => {
     props.setSavedNewsPageActive();
-  })
+  });
+
+  React.useEffect(() => {
+    props.getArticles();
+  }, []);
 
   return (
     <>
@@ -15,8 +19,8 @@ function SavedNews(props) {
         props.savedNews.length > 0
           ?
           <>
-            <SavedNewsHeader savedNews={props.savedNews} />
-            <NewsCardList savedNews={props.savedNews} />
+            <SavedNewsHeader savedNews={props.savedNews} sortedKeywords={props.sortedKeywords} />
+            <NewsCardList savedNews={props.savedNews} onDeleteButtonClick={props.onDeleteButtonClick} />
           </>
           :
           <p>Пока нет сохранённых статей</p>
